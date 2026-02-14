@@ -1,4 +1,4 @@
-import { type Message } from 'ai'
+import { type Message } from 'ai/react'
 
 import { Separator } from '@/components/ui/separator'
 import { ChatMessage } from '@/components/chat-message'
