@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DocBot Widget 测试页面</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: #f8fafc;
+        color: #1e293b;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 8px;
+      }
+      .subtitle {
+        color: #64748b;
+        margin-bottom: 32px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 20px;
+      }
+      .card h2 {
+        font-size: 1.25rem;
+        margin-bottom: 12px;
+        color: #0f172a;
+      }
+      .card p {
+        color: #475569;
+        line-height: 1.7;
+      }
+      .badge {
+        display: inline-block;
+        background: #dbeafe;
+        color: #1d4ed8;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        margin-right: 6px;
+        margin-bottom: 6px;
+      }
+      .hint {
+        margin-top: 40px;
+        padding: 16px;
+        background: #fefce8;
+        border: 1px solid #fde68a;
+        border-radius: 8px;
+        color: #92400e;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>DocBot 测试页面</h1>
+      <p class="subtitle">右下角的聊天气泡就是 DocBot Widget，点击试试！</p>
+
+      <div class="card">
+        <h2>什么是 DocBot？</h2>
+        <p>
+          DocBot 是一个基于
+          RAG（检索增强生成）技术的智能文档问答系统。它可以将你的文档变成一个 AI
+          驱动的聊天机器人，嵌入到任何网站中。
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>技术栈</h2>
+        <p>
+          <span class="badge">Next.js</span>
+          <span class="badge">Supabase</span>
+          <span class="badge">pgvector</span>
+          <span class="badge">Jina AI</span>
+          <span class="badge">OpenRouter</span>
+          <span class="badge">Tailwind CSS</span>
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>试试这些问题</h2>
+        <p>点击右下角的聊天气泡，尝试问以下问题：</p>
+        <ul
+          style="
+            margin-top: 12px;
+            padding-left: 20px;
+            color: #475569;
+            line-height: 2;
+          "
+        >
+          <li>DocBot 是什么？</li>
+          <li>如何开始使用？</li>
+          <li>支持什么格式的文档？</li>
+          <li>技术架构是怎样的？</li>
+        </ul>
+      </div>
+
+      <div class="hint">
+        提示：这个页面嵌入了 DocBot Widget，它会调用
+        <code>localhost:3000/api/widget</code>
+        接口进行问答。确保开发服务器正在运行。
+      </div>
+    </div>
+
+    <!-- DocBot Chat Widget -->
+    <script>
+      window.DocBotConfig = {
+        siteId: '2b2956b8-4c40-4a5c-83eb-9a6827eaf1d2',
+        apiUrl: 'http://localhost:3000/api/widget',
+        title: '我的知识库',
+        primaryColor: '#2563eb',
+        position: 'bottom-right'
+      }
+    </script>
+    <script src="http://localhost:3000/widget.js" defer></script>
+  </body>
+</html>

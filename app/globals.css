@@ -4,67 +4,69 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    /* Muted, sophisticated palette - warm white + charcoal + single indigo accent */
+    --background: 40 20% 97%;
+    --foreground: 220 20% 14%;
 
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+    --muted: 40 10% 92%;
+    --muted-foreground: 220 8% 50%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover-foreground: 220 20% 14%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 220 20% 14%;
 
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
+    --border: 220 10% 88%;
+    --input: 220 10% 88%;
 
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
+    /* Desaturated indigo as single accent point */
+    --primary: 230 52% 52%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
+    --secondary: 40 10% 93%;
+    --secondary-foreground: 220 20% 14%;
 
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: ;
+    --accent: 230 52% 52%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 65% 55%;
     --destructive-foreground: 0 0% 98%;
 
-    --ring: 240 5% 64.9%;
+    --ring: 230 52% 52%;
 
-    --radius: 0.5rem;
+    --radius: 0.625rem;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 225 20% 6%;
+    --foreground: 40 10% 94%;
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 225 15% 13%;
+    --muted-foreground: 220 8% 55%;
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 225 20% 6%;
+    --popover-foreground: 40 10% 94%;
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 225 15% 9%;
+    --card-foreground: 40 10% 94%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
+    --border: 225 12% 18%;
+    --input: 225 12% 18%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
+    --primary: 230 52% 60%;
+    --primary-foreground: 225 20% 6%;
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 225 15% 13%;
+    --secondary-foreground: 40 10% 94%;
 
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: ;
+    --accent: 230 52% 60%;
+    --accent-foreground: 225 20% 6%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 85.7% 97.3%;
+    --destructive: 0 55% 40%;
+    --destructive-foreground: 0 80% 96%;
 
-    --ring: 240 3.7% 15.9%;
+    --ring: 230 52% 60%;
   }
 }
 
@@ -74,5 +76,95 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Subtle gradient text - desaturated indigo to slate */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      hsl(230, 52%, 52%),
+      hsl(250, 35%, 52%)
+    );
+  }
+
+  /* Primary gradient - subtle, muted indigo tones */
+  .gradient-bg {
+    background-image: linear-gradient(
+      135deg,
+      hsl(230, 52%, 52%),
+      hsl(250, 35%, 52%)
+    );
+  }
+
+  /* Very subtle tinted background */
+  .gradient-bg-subtle {
+    background-image: linear-gradient(
+      135deg,
+      hsl(230, 30%, 96%),
+      hsl(250, 20%, 95%)
+    );
+  }
+
+  /* Card hover - refined, less aggressive */
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  .card-hover:hover {
+    @apply shadow-md;
+    transform: translateY(-1px);
+  }
+
+  /* Glass effect with warm tint */
+  .glass {
+    @apply bg-white/75 backdrop-blur-xl;
+    border-bottom: 1px solid hsl(220, 10%, 90%);
+  }
+
+  /* Inner glow card - subtle border highlight for depth */
+  .card-elevated {
+    @apply bg-white rounded-xl;
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.04),
+      0 1px 3px 0 rgba(0, 0, 0, 0.04),
+      0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  }
+  .card-elevated:hover {
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.06),
+      0 4px 12px 0 rgba(0, 0, 0, 0.06),
+      0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Noise texture overlay */
+  .noise-bg {
+    position: relative;
+  }
+  .noise-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.35;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px;
+    z-index: 0;
+  }
+
+  /* Soft button shadow with primary tint */
+  .btn-primary-shadow {
+    box-shadow:
+      0 1px 3px 0 hsla(230, 52%, 52%, 0.2),
+      0 1px 2px -1px hsla(230, 52%, 52%, 0.12);
+  }
+  .btn-primary-shadow:hover {
+    box-shadow:
+      0 4px 14px 0 hsla(230, 52%, 52%, 0.25),
+      0 2px 4px -2px hsla(230, 52%, 52%, 0.15);
   }
 }
