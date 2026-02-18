@@ -1,11 +1,17 @@
 import OpenAI from 'openai'
 import { ProxyAgent, fetch as proxyFetchRaw } from 'undici'
 
-const PROXY_URL = process.env.HTTPS_PROXY || process.env.HTTP_PROXY || 'http://127.0.0.1:10808'
-const proxyAgent = new ProxyAgent(PROXY_URL)
+const PROXY_URL = process.env.HTTPS_PROXY || process.env.HTTP_PROXY || ''
+const proxyAgent = PROXY_URL ? new ProxyAgent(PROXY_URL) : null
 
 function proxyFetch(url: any, init?: any): any {
-  return proxyFetchRaw(url, { ...init, dispatcher: proxyAgent })
+  if (proxyAgent) {
+    return proxyFetchRaw(url, { ...init, dispatcher: proxyAgent }).catch(() => {
+      // fallback to direct fetch if proxy fails
+      return fetch(url, init)
+    })
+  }
+  return fetch(url, init)
 }
 
 // OpenRouter-compatible client for chat completions
