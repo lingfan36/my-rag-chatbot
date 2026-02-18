@@ -9,7 +9,7 @@ await client.connect();
 
 await client.query(`
 CREATE OR REPLACE FUNCTION match_chunks(
-  query_embedding vector(1024),
+  query_embedding vector(768),
   match_site_id uuid,
   match_threshold float,
   match_count int

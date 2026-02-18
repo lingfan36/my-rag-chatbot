@@ -1,133 +1,428 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DocBot Widget 测试页面</title>
-    <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family:
-          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background: #f8fafc;
-        color: #1e293b;
-      }
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 40px 20px;
-      }
-      h1 {
-        font-size: 2rem;
-        margin-bottom: 8px;
-      }
-      .subtitle {
-        color: #64748b;
-        margin-bottom: 32px;
-      }
-      .card {
-        background: #fff;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 24px;
-        margin-bottom: 20px;
-      }
-      .card h2 {
-        font-size: 1.25rem;
-        margin-bottom: 12px;
-        color: #0f172a;
-      }
-      .card p {
-        color: #475569;
-        line-height: 1.7;
-      }
-      .badge {
-        display: inline-block;
-        background: #dbeafe;
-        color: #1d4ed8;
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 13px;
-        font-weight: 500;
-        margin-right: 6px;
-        margin-bottom: 6px;
-      }
-      .hint {
-        margin-top: 40px;
-        padding: 16px;
-        background: #fefce8;
-        border: 1px solid #fde68a;
-        border-radius: 8px;
-        color: #92400e;
-        font-size: 14px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>DocBot 测试页面</h1>
-      <p class="subtitle">右下角的聊天气泡就是 DocBot Widget，点击试试！</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>芋泡泡奶茶 - 官方网站</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-      <div class="card">
-        <h2>什么是 DocBot？</h2>
-        <p>
-          DocBot 是一个基于
-          RAG（检索增强生成）技术的智能文档问答系统。它可以将你的文档变成一个 AI
-          驱动的聊天机器人，嵌入到任何网站中。
-        </p>
-      </div>
+    body {
+      font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: #fffaf5;
+      color: #333;
+    }
 
-      <div class="card">
-        <h2>技术栈</h2>
-        <p>
-          <span class="badge">Next.js</span>
-          <span class="badge">Supabase</span>
-          <span class="badge">pgvector</span>
-          <span class="badge">Jina AI</span>
-          <span class="badge">OpenRouter</span>
-          <span class="badge">Tailwind CSS</span>
-        </p>
-      </div>
+    /* 导航 */
+    nav {
+      background: #fff;
+      padding: 16px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: #c0435a;
+    }
+    .logo span { color: #f7a84a; }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #555;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+    nav ul li a:hover { color: #c0435a; }
 
-      <div class="card">
-        <h2>试试这些问题</h2>
-        <p>点击右下角的聊天气泡，尝试问以下问题：</p>
-        <ul
-          style="
-            margin-top: 12px;
-            padding-left: 20px;
-            color: #475569;
-            line-height: 2;
-          "
-        >
-          <li>DocBot 是什么？</li>
-          <li>如何开始使用？</li>
-          <li>支持什么格式的文档？</li>
-          <li>技术架构是怎样的？</li>
-        </ul>
-      </div>
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #fce4ec 0%, #fff8e1 100%);
+      padding: 80px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .hero-text h1 {
+      font-size: 48px;
+      font-weight: 800;
+      color: #c0435a;
+      line-height: 1.2;
+    }
+    .hero-text h1 span { color: #f7a84a; }
+    .hero-text p {
+      margin-top: 16px;
+      font-size: 18px;
+      color: #666;
+      max-width: 480px;
+      line-height: 1.7;
+    }
+    .hero-btns {
+      margin-top: 32px;
+      display: flex;
+      gap: 16px;
+    }
+    .btn-primary {
+      background: #c0435a;
+      color: #fff;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #a8334a; }
+    .btn-outline {
+      background: transparent;
+      color: #c0435a;
+      padding: 14px 32px;
+      border: 2px solid #c0435a;
+      border-radius: 50px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { background: #c0435a; color: #fff; }
 
-      <div class="hint">
-        提示：这个页面嵌入了 DocBot Widget，它会调用
-        <code>localhost:3000/api/widget</code>
-        接口进行问答。确保开发服务器正在运行。
+    .hero-img {
+      font-size: 160px;
+      line-height: 1;
+      filter: drop-shadow(0 8px 24px rgba(192,67,90,0.2));
+    }
+
+    /* 热销产品 */
+    .section {
+      padding: 64px 48px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .section-sub {
+      text-align: center;
+      color: #999;
+      font-size: 15px;
+      margin-bottom: 40px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(192,67,90,0.15);
+    }
+    .product-icon { font-size: 56px; margin-bottom: 12px; }
+    .product-name { font-size: 18px; font-weight: 600; color: #333; }
+    .product-desc { font-size: 13px; color: #999; margin: 6px 0 12px; }
+    .product-price { font-size: 20px; font-weight: 700; color: #c0435a; }
+    .product-tag {
+      display: inline-block;
+      background: #fce4ec;
+      color: #c0435a;
+      font-size: 11px;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-top: 6px;
+    }
+
+    /* 特色 */
+    .features {
+      background: linear-gradient(135deg, #fff8f0 0%, #fff0f5 100%);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .feature-item {
+      text-align: center;
+      padding: 24px;
+    }
+    .feature-icon { font-size: 48px; margin-bottom: 16px; }
+    .feature-title { font-size: 18px; font-weight: 600; color: #333; margin-bottom: 8px; }
+    .feature-desc { font-size: 14px; color: #888; line-height: 1.6; }
+
+    /* 公告 */
+    .announcement {
+      background: #c0435a;
+      color: #fff;
+      text-align: center;
+      padding: 20px 48px;
+      font-size: 15px;
+    }
+    .announcement strong { font-size: 18px; }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: #aaa;
+      text-align: center;
+      padding: 32px;
+      font-size: 14px;
+    }
+    footer strong { color: #fff; }
+
+    @media (max-width: 768px) {
+      .hero { flex-direction: column; padding: 48px 24px; text-align: center; }
+      .hero-btns { justify-content: center; }
+      .hero-img { font-size: 100px; }
+      .hero-text h1 { font-size: 32px; }
+      .section { padding: 48px 24px; }
+      .features-grid { grid-template-columns: 1fr; }
+      nav { padding: 16px 24px; }
+      nav ul { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 导航 -->
+  <nav>
+    <div class="logo">芋<span>泡</span>泡</div>
+    <ul>
+      <li><a href="#">首页</a></li>
+      <li><a href="#">菜单</a></li>
+      <li><a href="#">门店</a></li>
+      <li><a href="#">会员</a></li>
+      <li><a href="#">关于我们</a></li>
+    </ul>
+  </nav>
+
+  <!-- 公告 -->
+  <div class="announcement">
+    🎉 <strong>新品上市！</strong> 紫薯芋泥波波奶茶限时优惠，买二送一！ &nbsp;|&nbsp; 满 30 元免费配送
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>每一杯<br>都是<span>甜蜜</span>时光</h1>
+      <p>精选优质茶叶与新鲜食材，手工制作每一杯奶茶。从芋泥波波到芝士奶盖，满足你对甜蜜的所有想象。</p>
+      <div class="hero-btns">
+        <button class="btn-primary">立即点单</button>
+        <button class="btn-outline">查看菜单</button>
       </div>
     </div>
+    <div class="hero-img">🧋</div>
+  </section>
+
+  <!-- 热销产品 -->
+  <section class="section">
+    <h2 class="section-title">热销产品</h2>
+    <p class="section-sub">深受顾客喜爱的人气饮品</p>
+    <div class="products">
+      <div class="product-card">
+        <div class="product-icon">🍵</div>
+        <div class="product-name">芋泥波波奶茶</div>
+        <div class="product-desc">招牌芋泥 + 手工波波</div>
+        <div class="product-price">¥22</div>
+        <div class="product-tag">招牌爆款</div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🍓</div>
+        <div class="product-name">草莓芝士奶盖</div>
+        <div class="product-desc">新鲜草莓 + 浓厚芝士</div>
+        <div class="product-price">¥26</div>
+        <div class="product-tag">新品</div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🍈</div>
+        <div class="product-name">抹茶红豆拿铁</div>
+        <div class="product-desc">宇治抹茶 + 蜜红豆</div>
+        <div class="product-price">¥24</div>
+        <div class="product-tag">热销</div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🥭</div>
+        <div class="product-name">芒果椰子冻</div>
+        <div class="product-desc">热带芒果 + 嫩滑椰冻</div>
+        <div class="product-price">¥25</div>
+        <div class="product-tag">季节限定</div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🍫</div>
+        <div class="product-name">黑糖珍珠鲜奶</div>
+        <div class="product-desc">手工黑糖珍珠 + 鲜牛奶</div>
+        <div class="product-price">¥20</div>
+        <div class="product-tag">经典</div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🍑</div>
+        <div class="product-name">桃桃乌龙茶</div>
+        <div class="product-desc">水蜜桃 + 清香乌龙</div>
+        <div class="product-price">¥21</div>
+        <div class="product-tag">清爽</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 特色 -->
+  <section class="section features">
+    <h2 class="section-title">我们的承诺</h2>
+    <p class="section-sub">用心制作，品质保证</p>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">🌿</div>
+        <div class="feature-title">天然原料</div>
+        <div class="feature-desc">精选优质茶叶，不添加人工色素和防腐剂，每一口都是天然好味道</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">👨‍🍳</div>
+        <div class="feature-title">手工制作</div>
+        <div class="feature-desc">每杯现点现做，波波、芋泥均为店内每日新鲜手工制作</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🚀</div>
+        <div class="feature-title">快速配送</div>
+        <div class="feature-desc">周边 3 公里 30 分钟极速配送，让你在家也能喝到新鲜奶茶</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <strong>芋泡泡奶茶</strong> &copy; 2024 &nbsp;|&nbsp; 地址：上海市静安区幸福路 88 号 &nbsp;|&nbsp; 电话：400-888-8888
+    <br><br>
+    有任何问题？点击右下角的 <strong>AI 客服</strong> 随时为你解答 🧋
+  </footer>
+
+    <!-- 测试问题面板 -->
+    <div id="test-panel" style="
+      position: fixed; bottom: 100px; left: 24px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+      padding: 18px 20px;
+      width: 240px;
+      z-index: 9998;
+      font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    ">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <span style="font-size:13px;font-weight:700;color:#333;">🧪 功能测试问题</span>
+        <button onclick="document.getElementById('test-panel').style.display='none'"
+          style="background:none;border:none;cursor:pointer;font-size:16px;color:#aaa;padding:0;">✕</button>
+      </div>
+      <div id="test-questions" style="display:flex;flex-direction:column;gap:8px;"></div>
+      <button onclick="document.getElementById('test-panel').style.display='none'; document.getElementById('test-toggle').style.display='block'"
+        style="margin-top:12px;width:100%;background:#f5f5f5;border:none;border-radius:8px;padding:8px;font-size:12px;color:#888;cursor:pointer;">
+        收起面板
+      </button>
+    </div>
+
+    <button id="test-toggle" onclick="document.getElementById('test-panel').style.display='block'; this.style.display='none'"
+      style="
+        display: none;
+        position: fixed; bottom: 100px; left: 24px;
+        background: #fff;
+        border: 1.5px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 10px 16px;
+        font-size: 13px;
+        color: #555;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        z-index: 9998;
+        font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      ">🧪 测试问题</button>
+
+    <script>
+      const testQuestions = [
+        { label: "有哪些招牌饮品？", q: "你们有哪些招牌饮品？" },
+        { label: "芋泥波波怎么做？", q: "芋泥波波奶茶是怎么制作的？" },
+        { label: "价格区间是多少？", q: "你们饮品的价格大概在什么范围？" },
+        { label: "支持外卖配送吗？", q: "你们支持外卖配送吗？多远范围？" },
+        { label: "有无糖/少糖选项？", q: "我可以要求无糖或少糖吗？" },
+        { label: "门店在哪里？", q: "你们门店在哪里？营业时间是？" },
+        { label: "有会员优惠吗？", q: "有会员制度或优惠活动吗？" },
+      ];
+
+      const container = document.getElementById('test-questions');
+      testQuestions.forEach(item => {
+        const btn = document.createElement('button');
+        btn.textContent = item.label;
+        btn.style.cssText = `
+          background: #fff5f7; border: 1.5px solid #f0d0d7;
+          border-radius: 8px; padding: 8px 12px;
+          font-size: 12px; color: #c0435a;
+          cursor: pointer; text-align: left;
+          transition: background 0.15s;
+          font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        `;
+        btn.onmouseover = () => btn.style.background = '#fce4ec';
+        btn.onmouseout = () => btn.style.background = '#fff5f7';
+        btn.onclick = () => {
+          // 尝试自动填入 widget 输入框并发送
+          const tryInject = (attempts = 0) => {
+            const input = document.querySelector('#docbot-widget input[type="text"], #docbot-widget textarea, .docbot-input');
+            const sendBtn = document.querySelector('#docbot-widget button[type="submit"], .docbot-send-btn');
+            if (input && sendBtn) {
+              input.focus();
+              const nativeInputSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set
+                || Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value')?.set;
+              if (nativeInputSetter) nativeInputSetter.call(input, item.q);
+              input.dispatchEvent(new Event('input', { bubbles: true }));
+              input.dispatchEvent(new Event('change', { bubbles: true }));
+              setTimeout(() => sendBtn.click(), 100);
+            } else if (attempts < 20) {
+              // Widget 未打开，先打开它
+              const toggleBtn = document.querySelector('.docbot-toggle, [class*="docbot"] button, #docbot-toggle');
+              if (toggleBtn && attempts === 0) toggleBtn.click();
+              setTimeout(() => tryInject(attempts + 1), 300);
+            } else {
+              // Fallback: 复制到剪贴板
+              navigator.clipboard?.writeText(item.q).then(() => {
+                alert(`已复制到剪贴板：\n"${item.q}"\n\n请粘贴到右下角客服窗口发送`);
+              }).catch(() => {
+                alert(`请在右下角客服窗口输入：\n"${item.q}"`);
+              });
+            }
+          };
+          tryInject();
+        };
+        container.appendChild(btn);
+      });
+    </script>
 
     <!-- DocBot Chat Widget -->
     <script>
       window.DocBotConfig = {
-        siteId: '2b2956b8-4c40-4a5c-83eb-9a6827eaf1d2',
-        apiUrl: 'http://localhost:3000/api/widget',
-        title: '我的知识库',
-        primaryColor: '#2563eb',
-        position: 'bottom-right'
-      }
+        siteId: "cb586f96-5343-4dcf-b3c1-9a32208fe0c0",
+        apiUrl: "https://my-rag-chatbot-rust.vercel.app/api/widget",
+        title: "奶茶店AI客服",
+        primaryColor: "#c0435a",
+        position: "bottom-right"
+      };
     </script>
-    <script src="http://localhost:3000/widget.js" defer></script>
-  </body>
+    <script src="https://my-rag-chatbot-rust.vercel.app/widget.js" defer></script>
+
+</body>
 </html>

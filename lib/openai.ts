@@ -76,11 +76,12 @@ export async function generateEmbedding(text: string): Promise<number[]> {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${JINA_API_KEY}`,
     },
-    body: JSON.stringify({
-      model: 'jina-embeddings-v3',
-      task: 'retrieval.query',
-      input: [input],
-    }),
+      body: JSON.stringify({
+        model: 'jina-embeddings-v3',
+        task: 'retrieval.query',
+        dimensions: 768,
+        input: [input],
+      }),
   })
 
   if (!res.ok) {
@@ -102,11 +103,12 @@ export async function generateEmbeddings(texts: string[]): Promise<number[][]> {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${JINA_API_KEY}`,
     },
-    body: JSON.stringify({
-      model: 'jina-embeddings-v3',
-      task: 'retrieval.passage',
-      input: filtered,
-    }),
+      body: JSON.stringify({
+        model: 'jina-embeddings-v3',
+        task: 'retrieval.passage',
+        dimensions: 768,
+        input: filtered,
+      }),
   })
 
   if (!res.ok) {

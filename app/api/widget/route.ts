@@ -66,9 +66,9 @@ export async function POST(req: Request) {
   const embedding = await generateEmbedding(message)
 
   const { data: chunks } = await supabaseAdmin.rpc('match_chunks', {
-    query_embedding: JSON.stringify(embedding),
+    query_embedding: embedding,
     match_site_id: site_id,
-    match_threshold: 0.7,
+    match_threshold: 0.3,
     match_count: 5,
   })
 
