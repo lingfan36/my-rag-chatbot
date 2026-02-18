@@ -26,7 +26,7 @@ export async function middleware(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
 
   // Protected routes
-  if (!user && req.nextUrl.pathname.startsWith('/dashboard')) {
+  if (!user && (req.nextUrl.pathname.startsWith('/dashboard') || req.nextUrl.pathname.startsWith('/admin'))) {
     const redirectUrl = req.nextUrl.clone()
     redirectUrl.pathname = '/sign-in'
     redirectUrl.searchParams.set('redirectedFrom', req.nextUrl.pathname)
